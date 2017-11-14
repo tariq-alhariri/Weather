@@ -1,96 +1,70 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<?php
+if(!empty($_GET['cityname'])){
 
-        <title>Open Weather Map</title>
+$open_weather_url='http://api.openweathermap.org/data/2.5/weather?q='.$_GET['cityname'].'&units=metric&cnt=7&appid=bab22d6acefa7658012bce2443ba7b56&cnt=16';
+$weather_json=file_get_contents($open_weather_url);
+$weather_array = json_decode($weather_json, true);
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+}
+?>
 
-            .full-height {
-                height: 50vh;
-            }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
 
-            .position-ref {
-                position: relative;
-            }
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-        <link rel="stylesheet" href="<?php echo asset('css/main.css');?>" type = "text/css">
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
+@extends('app')
+@section('content')
             <div class="content">
-                <div class="title m-b-md myColor" >
-                    Welcome to open weather map
+                <div class="title m-b-md  color:green " style="color:green;">
+                World Weather 
+                  
                 </div>
+                </div>
+@endsection
+<div>
+<form action=""  >
+              
+                    <input type="text" name = "cityname" placeholder="Enter city name">
+                    <button type = "submit">Submit</button>
+                    <br>
+                    <?php
+                    // if(!empty($weather_array)){
+                    //     // foreach($weather_array['main'] as $text);
+                    //     echo ('$weather_array');
+                    // }
+                    
+                  if(!empty($weather_array)){
+                      foreach($weather_array['main'] as $text){
+                            //   echo  "<font size='6'  color='black'> $weather_json</font>"
+                            print_r("<font size='6'  color='black'> Max temp :</font>");
+                            print_r($weather_array['main']['temp_max']);
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+                            print_r("<font size='6'  color='black'> Min temp : </font>");
+                            print_r($weather_array['main']['temp_min']);
+
+                            print_r("<font size='6'  color='black'> Humidity : </font>");
+                            print_r($weather_array['main']['humidity']);
+                            
+                            print_r("<br>");
+                      }
+                       
+
+
+
+                  }
+              
+                    ?>
+                    
+                    </form>
+</div>
+
+
+<div>
+<?php
+
+
+?>
+
+
+
+</div>

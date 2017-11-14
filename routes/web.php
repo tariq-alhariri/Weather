@@ -12,33 +12,10 @@
 */
 
 Route::get('/', function () {
-    // $network = new App\Networks;
-
-    //     $network-> lastname="Essa";
-    //     $network-> fullname="muhmmed Essa Hameed";
-    //     $network-> save();
-//     Schema::create('network', function ( $myTable)
-//     {
-//     $myTable -> increments('id');
-//     $myTable -> string('name');
-//     $myTable -> string('lastname',30);
-//     $myTable -> string('description',500);
-//     $myTable -> date('created');
-//     $myTable -> string('age');
-//     $myTable -> timestamps();
-   
-// });
-return view('welcome');
+    return view('welcome');
 });
-
-
-// Route::get('/', function () {
-//     return view('welcome');
+// Route::get('/about', function () {
+//     return view('about');
 // });
 
-Route::get('/about', function () {
-    return "Welcome to Tariq weather cast";
-});
-Route::get('/about/{username}', function ($username) {
-    return " Welcome $username ";
-});
+Route::get('/about','PageController@index');
